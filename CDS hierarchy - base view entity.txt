@@ -1,0 +1,16 @@
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'BOM Nodes - Base'
+define view entity z_i_bom_node
+  as select from zdemo_bom_node
+{
+  key bom_id         as BomId,
+  key node_id        as NodeId,
+      parent_node_id as ParentNodeId,
+      material_id    as MaterialId,
+      node_name      as NodeName,
+      node_type      as NodeType,
+      component_qty  as ComponentQty,
+      uom            as UoM,
+      valid_from     as ValidFrom,
+      valid_to       as ValidTo
+} 

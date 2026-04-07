@@ -1,0 +1,20 @@
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'BOM Nodes - Hierarchy Source'
+define view entity z_i_bom_node_hier_src
+  as select from z_i_bom_node as Node
+  association [0..1] to z_i_bom_node_hier_src as _Parent
+    on  $projection.BomId         = _Parent.BomId
+    and $projection.ParentNodeId  = _Parent.NodeId
+{
+  key Node.BomId,
+  key Node.NodeId,
+      Node.ParentNodeId,
+      Node.MaterialId,
+      Node.NodeName,
+      Node.NodeType,
+      Node.ComponentQty,
+      Node.UoM,
+      Node.ValidFrom,
+      Node.ValidTo,
+      _Parent
+}

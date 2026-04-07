@@ -1,0 +1,85 @@
+*&---------------------------------------------------------------------*
+*& Report Z_UPLOAD_DATA_TO_HIER
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT Z_UPLOAD_DATA_TO_HIER.
+
+*&---------------------------------------------------------------------*
+*& Report Z_CDS_TEST_PROGRAM
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+
+DATA lt_bom TYPE TABLE OF zdemo_bom_node.
+
+lt_bom = VALUE #(
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'BIKE_X1'         parent_node_id = ''               material_id = 'MOUNTAIN_BIKE_X1' node_name = 'Mountain Bike X1'    node_type = 'ROOT' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FRAME_SET'       parent_node_id = 'BIKE_X1'        material_id = 'FRAME_SET_X1'     node_name = 'Frame Set'           node_type = 'ASSY' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'WHEEL_ASSEMBLY'  parent_node_id = 'BIKE_X1'        material_id = 'WHEEL_ASSY_X1'    node_name = 'Wheel Assembly'      node_type = 'ASSY' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'BRAKE_SYSTEM'    parent_node_id = 'BIKE_X1'        material_id = 'BRAKE_SYS_X1'     node_name = 'Brake System'        node_type = 'ASSY' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'DRIVETRAIN'      parent_node_id = 'BIKE_X1'        material_id = 'DRIVETRAIN_X1'    node_name = 'Drivetrain'          node_type = 'ASSY' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'PACKAGING_SET'   parent_node_id = 'BIKE_X1'        material_id = 'PACK_SET_X1'      node_name = 'Packaging Set'       node_type = 'PACK' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FRONT_WHEEL'     parent_node_id = 'WHEEL_ASSEMBLY' material_id = 'FRONT_WHEEL_X1'   node_name = 'Front Wheel'         node_type = 'ASSY' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'REAR_WHEEL'      parent_node_id = 'WHEEL_ASSEMBLY' material_id = 'REAR_WHEEL_X1'    node_name = 'Rear Wheel'          node_type = 'ASSY' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FRONT_RIM'       parent_node_id = 'FRONT_WHEEL'    material_id = 'FRONT_RIM_29'     node_name = 'Front Rim 29"'       node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FRONT_HUB'       parent_node_id = 'FRONT_WHEEL'    material_id = 'FRONT_HUB_STD'    node_name = 'Front Hub'           node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FRONT_SPOKE_SET' parent_node_id = 'FRONT_WHEEL'    material_id = 'SPOKE_SET_32'     node_name = 'Front Spoke Set'     node_type = 'COMP' component_qty = '32.000' uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FRONT_TIRE'      parent_node_id = 'FRONT_WHEEL'    material_id = 'TIRE_29_TRAIL'    node_name = 'Front Tire 29"'      node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'REAR_RIM'        parent_node_id = 'REAR_WHEEL'     material_id = 'REAR_RIM_29'      node_name = 'Rear Rim 29"'        node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'REAR_HUB'        parent_node_id = 'REAR_WHEEL'     material_id = 'REAR_HUB_STD'     node_name = 'Rear Hub'            node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'REAR_SPOKE_SET'  parent_node_id = 'REAR_WHEEL'     material_id = 'SPOKE_SET_32'     node_name = 'Rear Spoke Set'      node_type = 'COMP' component_qty = '32.000' uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'REAR_TIRE'       parent_node_id = 'REAR_WHEEL'     material_id = 'TIRE_29_TRAIL'    node_name = 'Rear Tire 29"'       node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FRONT_BRAKE'     parent_node_id = 'BRAKE_SYSTEM'   material_id = 'DISC_BRAKE_F'     node_name = 'Front Brake'         node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'REAR_BRAKE'      parent_node_id = 'BRAKE_SYSTEM'   material_id = 'DISC_BRAKE_R'     node_name = 'Rear Brake'          node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'BRAKE_LEVER_SET' parent_node_id = 'BRAKE_SYSTEM'   material_id = 'BRAKE_LEVER_SET'  node_name = 'Brake Lever Set'     node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'CRANKSET'        parent_node_id = 'DRIVETRAIN'     material_id = 'CRANKSET_1X12'    node_name = 'Crankset'            node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'CHAIN'           parent_node_id = 'DRIVETRAIN'     material_id = 'CHAIN_12SPD'      node_name = 'Chain'               node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'CASSETTE'        parent_node_id = 'DRIVETRAIN'     material_id = 'CASSETTE_12SPD'   node_name = 'Cassette'            node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'PEDAL_SET'       parent_node_id = 'DRIVETRAIN'     material_id = 'PEDAL_SET_MTB'    node_name = 'Pedal Set'           node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'BOX'             parent_node_id = 'PACKAGING_SET'  material_id = 'BOX_BIKE_STD'     node_name = 'Bike Box'            node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'FOAM_SET'        parent_node_id = 'PACKAGING_SET'  material_id = 'FOAM_SET_STD'     node_name = 'Foam Protection Set' node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+  ( mandt = sy-mandt bom_id = 'BIKE_X1' node_id = 'MANUAL'          parent_node_id = 'PACKAGING_SET'  material_id = 'MANUAL_X1'        node_name = 'User Manual'         node_type = 'COMP' component_qty = '1.000'  uom = 'EA' valid_from = '20250101'
+valid_to = '99991231' )
+).
+
+INSERT zdemo_bom_node FROM TABLE @lt_bom.
+
+IF sy-subrc = 0.
+  COMMIT WORK.
+  WRITE: / 'Insert completed successfully. Number of records:', sy-dbcnt.
+ELSE.
+  ROLLBACK WORK.
+  WRITE: / 'Error during insert. SY-SUBRC =', sy-subrc.
+ENDIF.

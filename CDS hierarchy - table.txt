@@ -1,0 +1,19 @@
+@EndUserText.label : 'Demo BOM Nodes'
+@AbapCatalog.enhancementCategory : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zdemo_bom_node {
+  key mandt      : abap.clnt not null;
+  key bom_id     : abap.char(20) not null;
+  key node_id    : abap.char(30) not null;
+  parent_node_id : abap.char(30);
+  material_id    : abap.char(30) not null;
+  node_name      : abap.char(60);
+  node_type      : abap.char(10);
+  component_qty  : abap.dec(13,3);
+  uom            : abap.unit(3);
+  valid_from     : abap.dats;
+  valid_to       : abap.dats;
+
+}

@@ -1,0 +1,22 @@
+@EndUserText.label: 'INV report table function'
+define table function Z_CDS_TF_INV
+  with parameters
+    p_date_from : dats,
+    p_date_to   : dats
+returns
+{
+  mandt             : mandt;
+  seq               : zmm_seq;
+  entity            : zmm_entity;
+  sourcesys         : zmm_sourcesys;
+  bptaxid           : zmm_bptaxid;
+  ivcnum            : zmm_ivcnum;
+  fivcnum           : zmm_ivcnum;
+  ivcdate           : zmm_ivcdate;
+  currency          : waers;
+  tot_gross         : jv_wertv12;
+  tot_net           : jv_wertv12;
+  tot_vat           : jv_wertv12;
+}
+implemented by method
+  z_cds_cl_amdp_inv=>get_einv;

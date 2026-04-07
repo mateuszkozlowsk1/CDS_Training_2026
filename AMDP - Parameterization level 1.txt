@@ -1,0 +1,105 @@
+class z_cds_cl_amdp_inv definition
+  public
+  final
+  create public .
+
+  public section.
+    interfaces: if_amdp_marker_hdb.
+
+
+    class-methods get_einv
+        for table function Z_CDS_TF_INV.
+
+
+  protected section.
+  private section.
+endclass.
+
+
+class z_cds_cl_amdp_inv implementation.
+
+  method get_einv
+  by database function
+  for hdb
+  language sqlscript
+  options read-only
+  using z_db_inv_a z_db_inv_b.
+
+
+        lt_result =
+          select
+            a.mandt,
+            a.seq,
+            a.bukrs,
+            a.gjahr,
+            a.entity,
+            a.sourcesys,
+            a.bpkey,
+            a.bptaxid,
+            a.ivcnum,
+            a.fivcnum,
+            a.ivcdate,
+            a.cpudt ,
+            a.autoivc,
+            a.bptype,
+            a.einv_type,
+            a.bpname,
+            a.currency,
+            a.tot_gross,
+            a.tot_net,
+            a.tot_vat
+
+          FROM z_db_inv_a AS a
+            where mandt = 200 and a.ivcdate between :p_date_from and :p_date_to
+
+          union all
+
+          select
+            a.mandt,
+            a.seq,
+            a.bukrs,
+            a.gjahr,
+            a.entity,
+            a.sourcesys,
+            a.bpkey,
+            a.bptaxid,
+            a.ivcnum,
+            a.fivcnum,
+            a.ivcdate,
+            a.cpudt ,
+            a.autoivc,
+            a.bptype,
+            a.einv_type,
+            a.bpname,
+            a.currency,
+            a.tot_gross,
+            a.tot_net,
+            a.tot_vat
+
+          FROM z_db_inv_b AS a
+            where mandt = 200 and a.ivcdate between :p_date_from and :p_date_to;
+
+
+    et_ret = select
+            mandt,
+            seq,
+            entity,
+            sourcesys,
+            bptaxid,
+            ivcnum,
+            fivcnum,
+            ivcdate,
+            currency,
+            tot_gross,
+            tot_net,
+            tot_vat
+            from :lt_result;
+
+        return :et_ret;
+
+
+
+
+  endmethod.
+
+endclass.

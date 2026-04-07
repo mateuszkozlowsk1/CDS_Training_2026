@@ -1,0 +1,19 @@
+@EndUserText.label: 'BOM Hierarchy'
+define hierarchy zh_bom_hierarchy
+  as parent child hierarchy(
+    source z_i_bom_node_hier_src
+    child to parent association _Parent
+    siblings order by NodeName ascending
+  )
+{
+  key BomId,
+  key NodeId,
+      ParentNodeId,
+      MaterialId,
+      NodeName,
+      NodeType,
+      ComponentQty,
+      UoM,
+      ValidFrom,
+      ValidTo
+}

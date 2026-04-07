@@ -1,0 +1,39 @@
+@AbapCatalog.sqlViewName: 'Z_CDS_V_REP'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@ClientHandling.type: #CLIENT_DEPENDENT
+@EndUserText.label: 'Invoice selection for reporting'
+define view Z_CDS_INV_REP
+  with parameters
+    p_date_from : dats,
+    p_date_to   : dats
+  as select from Z_CDS_TF_INV(
+                 p_date_from: $parameters.p_date_from,
+                 p_date_to  : $parameters.p_date_to
+                 )
+{
+  key  mandt,
+  key  seq,
+  key  entity,
+  key  sourcesys,
+  key  bptaxid  as tax_number,
+  key  ivcdate  as series_invoice_date,
+  key  ivcnum   as invoice_number,
+       fivcnum  as series_invoice_number,
+       
+  @Semantics.currencyCode: true
+      currency,
+
+  @Semantics.amount.currencyCode: 'currency'
+      tot_gross,
+
+  @Semantics.amount.currencyCode: 'currency'
+      tot_net,
+
+  @Semantics.amount.currencyCode: 'currency'
+      tot_vat
+
+}
+where
+  ivcdate between $parameters.p_date_from and $parameters.p_date_to;
