@@ -1,0 +1,35 @@
+@AbapCatalog.sqlViewName: 'Z_CDS_VIEW_BSEG'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'SAFT bseg view'
+define view z_cds_i_bseg as select from bseg 
+
+  association[1..1] to z_cds_view_bkpf as _bkpf 
+  on  $projection.bukrs = _bkpf.bukrs 
+  and $projection.belnr = _bkpf.belnr
+  and $projection.gjahr = _bkpf.gjahr
+  
+ {
+   key bukrs,
+   key belnr,
+   key gjahr,
+   key buzei,
+   
+   wrbtr as currencyamount,
+   dmbtr as amount,
+   hkont,
+   sgtxt,
+   h_blart as blart,
+   mwskz,
+   lifnr,
+   kunnr,
+   shkzg,
+   prctr,
+   kostl as rcntr,
+   koart,
+   ktosl,
+   xnegp,
+   buzid,
+   stceg
+ } 

@@ -1,0 +1,65 @@
+@AbapCatalog.sqlViewName: 'Z_CDS_VIEW_FIN'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'SAFT financial extension'
+define view z_cds_co_fin
+  as select from Z_CDS_I_ACDOCA as _acdoca
+
+  association [1..1] to z_cds_i_bkpf as _bkpf on  $projection.bukrs = _bkpf.bukrs
+                                              and $projection.belnr = _bkpf.belnr
+                                              and $projection.gjahr = _bkpf.gjahr
+
+
+  association [0..1] to z_cds_i_bseg as _bseg on  $projection.bukrs = _bseg.bukrs
+                                              and $projection.belnr = _bseg.belnr
+                                              and $projection.gjahr = _bseg.gjahr
+                                              and $projection.buzei = _bseg.buzei
+
+{
+  key _acdoca.gjahr,
+  key _acdoca.rbukrs as bukrs,
+  key _acdoca.belnr,
+  key _bkpf.blart    as JournalID,
+  key _acdoca.docln  as RecordID,
+  key _acdoca.rldnr,
+
+      _bkpf.monat    as Period,
+      _bkpf.bldat    as TransactionDate,
+      _bkpf.ltext    as DescriptionTr,
+      _bkpf.cpudt    as SystemEntryDate,
+      _bkpf.budat    as GLPostingDate,
+      _bkpf.waers    as CurencyCode,
+      _bkpf.kursf,
+      _bkpf.bstat,
+      _bkpf.tcode,
+      _bkpf.awkey,
+      _bkpf.usnam,
+      _bkpf.bktxt,
+      _bkpf.xblnr    as invoice_no,
+
+      _acdoca.hkont  as AccountID,
+      _acdoca.amount,
+      _acdoca.currencyamount,
+      _acdoca.lifnr,
+      _acdoca.kunnr,
+      _acdoca.sgtxt  as Description,
+      _acdoca.mwskz  as TaxCode,
+      _acdoca.shkzg,
+      _acdoca.prctr,
+      _acdoca.rcntr,
+      _acdoca.koart,
+      _acdoca.ktosl,
+      _acdoca.linetype,
+      _acdoca.buzei,
+
+      _bseg.stceg,
+      _bseg.buzid
+
+}
+where
+  (
+       _bkpf.bstat = ''
+    or _bkpf.bstat = 'U'
+    or _bkpf.bstat = 'L'
+  )

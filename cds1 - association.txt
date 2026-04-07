@@ -1,0 +1,36 @@
+@AbapCatalog.sqlViewName: 'Z_CDS_VIEW_BKPF'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'BKPF basic view'
+@VDM.viewType: #BASIC
+define view z_cds_i_bkpf as select from bkpf 
+
+ association [0..1] to t003t  as _t003t
+  on $projection.blart =  _t003t.blart
+  and spras = '4' 
+  and ( bstat = ''
+     or bstat = 'U'
+     or bstat = 'L' )
+  
+  {
+    key bukrs,
+    key belnr,
+    key gjahr,
+    key blart,
+    monat,
+    bldat,
+    cpudt,
+    budat,
+    waers,
+    kursf,
+    bstat,
+    xblnr,
+    tcode,
+    awkey,
+    usnam,
+    bktxt,
+    _t003t.ltext
+} where ( bstat = ''
+       or bstat = 'U'
+       or bstat = 'L' );

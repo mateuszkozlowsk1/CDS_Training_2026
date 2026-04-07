@@ -1,0 +1,34 @@
+@AbapCatalog.sqlViewName: 'Z_CDS_VIEW_ACDO'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'SAFT acdoca basic view'
+define view Z_CDS_I_ACDOCA as select from acdoca 
+
+  association[1..1] to z_cds_view_bkpf as _bkpf 
+  on  $projection.rbukrs = _bkpf.bukrs 
+  and $projection.belnr = _bkpf.belnr
+  and $projection.gjahr = _bkpf.gjahr
+  
+  {  
+  key rbukrs,
+  key belnr,
+  key gjahr,
+  key docln,
+  key rldnr,
+  wsl as currencyamount,
+  hsl as amount,
+  racct as hkont,
+  sgtxt,
+  blart,
+  mwskz,
+  lifnr,
+  kunnr,
+  drcrk as shkzg,
+  prctr,
+  rcntr,
+  koart,
+  ktosl,
+  linetype,
+  buzei
+  }
